@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/williamtriinh/cuhacking2020-server/issues"
   },
-  "homepage": "https://github.com/williamtriinh/cuhacking2020-server#readme"
+  "homepage": "https://github.com/williamtriinh/cuhacking2020-server#readme",
+  "keywords": [],
+  "dependencies": {
+    "mongodb": "^3.4.1"
+  }
 }
