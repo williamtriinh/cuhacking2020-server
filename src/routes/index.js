@@ -65,15 +65,22 @@ module.exports = function (app, db) {
     })
 
     app.post('/login', (req, res) => {
-        console.log(req.body.username)
-        console.log(req.body.password)
+        console.log(req.body.username);
+        console.log(req.body.pass);
         //gets info
         const collection = db
         .db("jeff")
         .collection("users");
-        await collection.findOne({username: 'jim'}, (err, result) => { //checks
-        console.log(result)
-        res.send({res:"works"})
+        collection.findOne({ username: (req.body.username) }, (err, result) => { //checks
+            if((req.body.pass)=== result.password){
+                var privateKey = fs.readFileSync('private.key');
+                var token = jwt.sign({ username: result.username }, privateKey, { algorithm: 'RS256'});
+                console.log(token);
+                res.send(token);
+            }else{
+                console.log("Your password does not match your username")
+            }
+            res.send({ res: "works" });
+        })
     })
-})
 };
