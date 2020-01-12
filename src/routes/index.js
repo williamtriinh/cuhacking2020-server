@@ -59,9 +59,9 @@ module.exports = function (app, db) {
         const collection = db
             .db("jeff")
             .collection("users");
-            jwt.verify(req.body.token, 'meme', function(err, decoded) {
-                console.log(decoded.foo) // bar
-            });
+        jwt.verify(req.body.token, 'meme', function (err, decoded) {
+            console.log(decoded.foo) // bar
+        });
     })
 
     app.post('/login', (req, res) => {
@@ -69,18 +69,16 @@ module.exports = function (app, db) {
         console.log(req.body.pass);
         //gets info
         const collection = db
-        .db("jeff")
-        .collection("users");
+            .db("jeff")
+            .collection("users");
         collection.findOne({ username: (req.body.username) }, (err, result) => { //checks
-            if((req.body.pass)=== result.password){
-                var privateKey = fs.readFileSync('private.key');
-                var token = jwt.sign({ username: result.username }, privateKey, { algorithm: 'RS256'});
+            if ((req.body.password) === result.password) {
+                var token = jwt.sign({ username: result.username }, 'meme');
                 console.log(token);
-                res.send(token);
-            }else{
-                console.log("Your password does not match your username")
+                res.send({ token: token });
+            } else {
+                res.send({ error: "Invalid Login" });
             }
-            res.send({ res: "works" });
         })
     })
 };
