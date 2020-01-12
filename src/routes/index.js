@@ -17,8 +17,17 @@ module.exports = function(app, db) {
         })
         console.log("asd")
     })
+
     app.post('/login', (req, res) => {
-        console.log(req.body.user)
+        console.log(req.body.username)
+        console.log(req.body.password)
+        //gets info
+        const collection = db
+        .db("jeff")
+        .collection("users");
+        await collection.findOne({username: 'jim'}, (err, result) => { //checks
+        console.log(result)
         res.send({res:"works"})
     })
+})
 };
