@@ -10,6 +10,8 @@ app.use(bodyParser.json());
 
 var uri = "mongodb+srv://Chris:meme@studentstuff-qyuqj.gcp.mongodb.net/test?retryWrites=true&w=majority";
 MongoClient.connect(uri, { useNewUrlParser: true }, (err, database) => {
+  console.log(err)
+  console.log(database)
   if (err) {
     console.log("error")
   } else {
