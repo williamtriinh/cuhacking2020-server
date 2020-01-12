@@ -64,6 +64,10 @@ module.exports = function (app, db) {
             .db("jeff")
             .collection("userClasses");
         jwt.verify(req.body.token, "meme", function (err, decoded) {
+            console.log("Decoded: " + decoded);
+            if (err != undefined) {
+                console.log(err);
+            }
             res.send(collectionClasses.find({username: decoded.username}, (err, result) => {
                 if (err || result == null) {
                     console.log(result)
