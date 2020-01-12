@@ -10,11 +10,14 @@ app.use(bodyParser.json());
 
 var uri = "mongodb+srv://Chris:meme@studentstuff-qyuqj.gcp.mongodb.net/test?retryWrites=true&w=majority";
 MongoClient.connect(uri, { useNewUrlParser: true }, (err, database) => {
+  console.log(err)
+  console.log(database)
   if (err) {
     console.log("error")
   } else {
     main(app, database);
     app.listen(8000, () => {
+      console.log(8000)
       console.log("Listening on port " + 8000);
     });
   }
