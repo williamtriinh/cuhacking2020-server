@@ -16,7 +16,7 @@ module.exports = function (app, db) {
         //     console.log(err)
         //     res.send({ res: "back" })
         // })
-        res.send({valid: "test endpoint working"})
+        res.send({ valid: "test endpoint working" })
     })
 
     // {
@@ -117,22 +117,31 @@ module.exports = function (app, db) {
             .db("jeff")
             .collection("users");
         const collectionClasses = db.db("jeff").collection("usersClasses");
-        let classes = await collectionClasses.find({catID: req.body.catID}).toArray()
+        let classes = await collectionClasses.find({ catID: req.body.catID }).toArray()
         let users = []
         classes.map(ele => {
             let userToUpdate = users.findIndex((eleUser) => eleUser.username == ele.username);
             if (userToUpdate == -1) {
-                users.push({username: ele.username, classes: [ele.name]})
+                users.push({ username: ele.username, classes: [ele.name] })
             } else {
                 users[userToUpdate].classes.push(ele.name)
             }
         })
-        for (let x = 0;x < users.length; x++) {
-            let userData = await collectionUsers.findOne({username: users[x].username})
-            users[x] = {...users[x], email: userData.email, name: userData.name}
+        for (let x = 0; x < users.length; x++) {
+            let userData = await collectionUsers.findOne({ username: users[x].username })
+            users[x] = { ...users[x], email: userData.email, name: userData.name }
         }
         res.send(users)
     })
+
+    app.get('/getCategories', async (req, res) => {
+        const collectionUsers = db
+            .db("jeff")
+            .collection("categories");
+        let categories = await collectionUsers.find().toArray();
+        console.log(categories)
+        res.send(categories)
+    });
 
     // app.get('/')
 };
