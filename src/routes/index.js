@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 // const { JWT_KEY } = require("../../envorment.json");
 
 module.exports = function (app, db) {
+    console.log("working")
     app.post('/test', async (req, res) => {
         console.log(req.body)
         // // console.log(req)
