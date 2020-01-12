@@ -64,13 +64,8 @@ module.exports = function (app, db) {
             .db("jeff")
             .collection("userClasses");
         const collectionCats = db.db("jeff").collection("users");
-        const { name } = req.body;
-        if (catId == undefined || name == undefined) {
-            res.send({ error: "Invalid Body"});
-            return;
-        }
         jwt.verify(req.body.taken, "meme", function (err, decoded) {
-            res.send(collectionClasses.find({class: decoded.username}, (err, result) => {
+            res.send(collectionClasses.find({username: decoded.username}, (err, result) => {
                 if (err || result == null) {
                     console.log(result)
                     res.send({ error: "Failed to insert class" })
