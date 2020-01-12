@@ -62,13 +62,14 @@ module.exports = function (app, db) {
     app.post('/getClassFromUser', async (req, res) => {
         const collectionClasses = db
             .db("jeff")
-            .collection("userClasses");
+            .collection("usersClasses");
         console.log(req.body.token)
         jwt.verify(req.body.token, "meme", async function(err, decoded) {
             console.log("Decoded: " + decoded);
             if (err != undefined) {
                 console.log(err);
             }
+            console.log(decoded.username)
             let classes = await collectionClasses.find({username: decoded.username}).toArray();
             console.log(classes)
             res.send(classes)
