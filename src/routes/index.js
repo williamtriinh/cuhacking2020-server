@@ -63,8 +63,7 @@ module.exports = function (app, db) {
         const collectionClasses = db
             .db("jeff")
             .collection("userClasses");
-        const collectionCats = db.db("jeff").collection("users");
-        jwt.verify(req.body.taken, "meme", function (err, decoded) {
+        jwt.verify(req.body.token, "meme", function (err, decoded) {
             res.send(collectionClasses.find({username: decoded.username}, (err, result) => {
                 if (err || result == null) {
                     console.log(result)
