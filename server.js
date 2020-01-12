@@ -7,7 +7,7 @@ const app = express();
 
 app.use(bodyParser.json());
 
-
+var port = 8000;
 var uri = "mongodb+srv://Chris:meme@studentstuff-qyuqj.gcp.mongodb.net/test?retryWrites=true&w=majority";
 MongoClient.connect(uri, { useNewUrlParser: true }, (err, database) => {
   console.log(err)
@@ -16,9 +16,9 @@ MongoClient.connect(uri, { useNewUrlParser: true }, (err, database) => {
     console.log("error")
   } else {
     main(app, database);
-    app.listen(8000, () => {
-      console.log(8000)
-      console.log("Listening on port " + 8000);
+    app.listen(port, () => {
+      console.log(port)
+      console.log("Listening on port " + port);
     });
   }
 });
