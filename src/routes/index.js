@@ -59,22 +59,19 @@ module.exports = function (app, db) {
         });
     });
 
-    app.post('/getClassFromUser', (req, res) => {
+    app.post('/getClassFromUser', async (req, res) => {
         const collectionClasses = db
             .db("jeff")
             .collection("userClasses");
-        jwt.verify(req.body.token, "meme", function (err, decoded) {
+        console.log(req.body.token)
+        jwt.verify(req.body.token, "meme", async function(err, decoded) {
             console.log("Decoded: " + decoded);
             if (err != undefined) {
                 console.log(err);
             }
-            res.send(collectionClasses.find({username: decoded.username}, (err, result) => {
-                if (err || result == null) {
-                    console.log(result)
-                    res.send({ error: "Failed to insert class" })
-                    return [];
-                }
-            }).toArray());
+            let classes = await collectionClasses.find({username: decoded.username}).toArray();
+            console.log(classes)
+            res.send(classes)
         });
     });
 
