@@ -6,15 +6,16 @@ const jwt = require("jsonwebtoken");
 module.exports = function (app, db) {
     app.post('/test', async (req, res) => {
         console.log(req.body)
-        // console.log(req)
-        const collection = db
-            .db("jeff")
-            .collection("users");
-        collection.findOne({ name: 'jim' }, (err, results) => {
-            console.log(results)
-            console.log(err)
-            res.send({ res: "back" })
-        })
+        // // console.log(req)
+        // const collection = db
+        //     .db("jeff")
+        //     .collection("users");
+        // collection.findOne({ name: 'jim' }, (err, results) => {
+        //     console.log(results)
+        //     console.log(err)
+        //     res.send({ res: "back" })
+        // })
+        res.send({valid: "test endpoint working"})
     })
 
     // {

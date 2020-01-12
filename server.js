@@ -15,6 +15,7 @@ MongoClient.connect(uri, { useNewUrlParser: true }, (err, database) => {
   } else {
     main(app, database);
     app.listen(8000, () => {
+      console.log(8000)
       console.log("Listening on port " + 8000);
     });
   }
