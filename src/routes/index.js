@@ -110,7 +110,7 @@ module.exports = function (app, db) {
     // {
     //     "catID": 0
     // }
-    app.get('/getCategoryUsers', async (req, res) => {
+    app.post('/getCategoryUsers', async (req, res) => {
         if (req.body.catID == null) {
             res.send({ error: "Invalid Body" })
             return
@@ -136,7 +136,7 @@ module.exports = function (app, db) {
         res.send(users)
     })
 
-    app.get('/getCategories', async (req, res) => {
+    app.post('/getCategories', async (req, res) => {
         const collectionUsers = db
             .db("jeff")
             .collection("categories");
