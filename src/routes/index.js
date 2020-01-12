@@ -59,7 +59,7 @@ module.exports = function (app, db) {
         });
     });
 
-    app.post('getClassFromUser', (req, res) => {
+    app.post('/getClassFromUser', (req, res) => {
         const collectionClasses = db
             .db("jeff")
             .collection("userClasses");
@@ -75,11 +75,11 @@ module.exports = function (app, db) {
                     res.send({ error: "Cant find category" })
                     return
                 }
-                res.send(collectionClasses.find({class: collectionCats[decoded.username]}, (err, result) => {
+                res.send(collectionClasses.find({class: decoded.username}, (err, result) => {
                     if (err || result == null) {
                         console.log(result)
                         res.send({ error: "Failed to insert class" })
-                        return
+                        return [];
                     }
                 }).toArray());
             });
