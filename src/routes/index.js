@@ -64,9 +64,7 @@ module.exports = function (app, db) {
         });
     })
 
-    app.post('/login', (req, res) => {
-        console.log(req.body.username);
-        console.log(req.body.pass);
+     app.post('/login', (req, res) => {
         //gets info
         const collection = db
             .db("jeff")
