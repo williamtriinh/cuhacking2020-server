@@ -9,4 +9,8 @@ module.exports = function(app, db) {
         console.log("asd")
         res.send({res: "back"})
     })
-}
+    app.post('/login', (req, res) => {
+        console.log(req.body.user)
+        res.send({res:"works"})
+    })
+};
